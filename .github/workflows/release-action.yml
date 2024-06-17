@@ -1,0 +1,33 @@
+# YAML -*- mode: yaml; tab-width: 2; indent-tabs-mode: nil; coding: utf-8 -*-
+---
+name: release-action
+on: [push]
+permissions:
+  contents: write
+jobs:
+  run:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          repository: 'CrossStream/crossstream'
+      - id: log
+        run: echo "tag=$(git describe --tags --always)" >> $GITHUB_OUTPUT
+      - id: exclude
+        run: echo '* export-ignore' > .gitattribute
+      - id: contents
+        run: >
+           echo ${{ steps.log.outputs.tag }}
+           > ${{ github.event.repository.name }}.txt           
+      - id: publish
+        env:
+          repository: 'CrossStream/crossstream-wip'
+          GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
+        run: >
+          gh auth status ;
+          gh release create --prerelease
+          ${{ steps.log.outputs.tag }}
+          ${{ github.event.repository.name }}.txt
+          -R ${{ env.repository }}
