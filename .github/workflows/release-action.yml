@@ -4,7 +4,6 @@ name: release-action
 on: [push]
 jobs:
   build:
-    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,21 +12,16 @@ jobs:
           repository: 'CrossStream/crossstream'
       - id: log
         run: echo "tag=$(git describe --tags --always)" >> $GITHUB_OUTPUT
-      - id: exclude
-        run: echo '* export-ignore' > .gitattribute
       - id: contents
         run: >
            echo ${{ steps.log.outputs.tag }}
            > ${{ github.event.repository.name }}.txt
-  publish:
-    needs: build
-    env:
-      repository: ${{ github.repository }}-binaries
-      GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
-    steps:
       - id: release
+        env:
+          repository: ${{ github.repository }}-binaries
+          GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
         run: >
           gh release create --prerelease
-          ${{ steps.log.outputs.tag }}
-          ${{ github.event.repository.name }}.txt
-          -R ${{ env.repository }}
+            ${{ steps.log.outputs.tag }}
+            ${{ github.event.repository.name }}.txt
+            -R ${{ env.repository }}
