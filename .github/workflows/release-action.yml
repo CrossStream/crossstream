@@ -2,8 +2,6 @@
 ---
 name: release-action
 on: [push]
-permissions:
-  contents: write
 jobs:
   run:
     permissions: write-all
