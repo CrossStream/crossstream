@@ -3,7 +3,7 @@
 name: release-action
 on: [push]
 jobs:
-  run:
+  build:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +20,7 @@ jobs:
            echo ${{ steps.log.outputs.tag }}
            > ${{ github.event.repository.name }}.txt
   publish:
-    needs: run
+    needs: build
     env:
       repository: 'CrossStream/crossstream-wip'
       GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
