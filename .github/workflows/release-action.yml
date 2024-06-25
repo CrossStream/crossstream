@@ -21,6 +21,7 @@ jobs:
           repository: ${{ github.repository }}-wip
           GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
         run: >
+          cat ${{ github.event.repository.name }}.txt ;
           gh release create --prerelease
           ${{ steps.log.outputs.tag }}
           ${{ github.event.repository.name }}.txt
