@@ -20,12 +20,12 @@ jobs:
            echo ${{ steps.log.outputs.tag }}
            > ${{ github.event.repository.name }}.txt
   publish:
-     needs: run
-     env:
-       repository: 'CrossStream/crossstream-wip'
-       GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
-     run: >
-       gh release create --prerelease
-         ${{ steps.log.outputs.tag }}
-         ${{ github.event.repository.name }}.txt
-         -R ${{ env.repository }}
+    needs: run
+    env:
+      repository: 'CrossStream/crossstream-wip'
+      GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
+    run: >
+      gh release create --prerelease
+        ${{ steps.log.outputs.tag }}
+        ${{ github.event.repository.name }}.txt
+        -R ${{ env.repository }}
