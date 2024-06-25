@@ -15,7 +15,7 @@ jobs:
       - id: contents
         run: >
            echo ${{ steps.log.outputs.tag }}
-             > ${{ github.event.repository.name }}.txt
+           > ${{ github.event.repository.name }}.txt
       - id: release
         env:
           repository: ${{ github.repository }}-wip
