@@ -22,7 +22,7 @@ jobs:
   publish:
     needs: build
     env:
-      repository: 'CrossStream/crossstream-wip'
+      repository: ${{ github.repository }}-binaries
       GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
     steps:
       - id: release
