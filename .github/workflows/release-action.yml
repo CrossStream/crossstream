@@ -27,3 +27,4 @@ jobs:
           token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
           files: ${{ github.event.repository.name }}.txt
 #
+
