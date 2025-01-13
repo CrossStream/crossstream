@@ -4,7 +4,9 @@ name: release-action
 
 
 on:  # yamllint disable-line rule:truthy
-  push
+  push:
+    tags:
+      - "v*.*.*"
 jobs:
   build:
     runs-on: ubuntu-latest
