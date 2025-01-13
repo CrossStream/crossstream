@@ -10,7 +10,7 @@ jobs:
         with:
           fetch-depth: 0
           repository: 'CrossStream/crossstream'
-      - id: log
+      - id: tag
         run: echo "tag=$(git describe --tags --always)" >> $GITHUB_OUTPUT
       - id: contents
         run: >
@@ -20,9 +20,10 @@ jobs:
         env:
           repository: ${{ github.repository }}-wip
           GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
+          file: ${{ github.event.repository.name }}.txt
+
         run: >
-          cat ${{ github.event.repository.name }}.txt ;
           gh release create --prerelease
-          ${{ steps.log.outputs.tag }}
-          ${{ github.event.repository.name }}.txt
+          ${{ steps.tag.outputs.tag }}
+          ${{ env.file }}
           -R ${{ env.repository }}
