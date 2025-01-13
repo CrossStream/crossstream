@@ -18,7 +18,7 @@ jobs:
            > ${{ github.event.repository.name }}.txt
       - id: release
         env:
-          repository: ${{ github.repository }}-wip
+          repository: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
           file: ${{ github.event.repository.name }}.txt
         run: >
