@@ -26,5 +26,4 @@ jobs:
           # with permissions to create releases in the other repo
           token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
           files: ${{ github.event.repository.name }}.txt
-##
-
+###
