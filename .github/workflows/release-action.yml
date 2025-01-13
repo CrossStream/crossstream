@@ -19,7 +19,7 @@ jobs:
       - id: release
         env:
           repository: ${{ github.repository }}-wip
-          GH_TOKEN: ${{ secrets.ZWAVE_PERSONAL_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
           file: ${{ github.event.repository.name }}.txt
 
         run: >
