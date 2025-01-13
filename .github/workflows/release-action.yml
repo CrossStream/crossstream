@@ -1,8 +1,16 @@
 # YAML -*- mode: yaml; tab-width: 2; indent-tabs-mode: nil; coding: utf-8 -*-
 ---
 name: release-action
-on:
-  push
+
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+  push:
+    branches:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+.*'
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
