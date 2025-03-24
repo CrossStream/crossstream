@@ -29,5 +29,5 @@ jobs:
           # note you'll typically need to create a personal access token
           # with permissions to create releases in the other repo
           token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
-          files: *.txt
+          files: ${{ github.event.repository.name }}.txt
 
