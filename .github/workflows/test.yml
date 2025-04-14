@@ -17,4 +17,4 @@ jobs:
         uses: robinraju/release-downloader@v1.12
         with:
           repository: crossstream/crossstream
-          fileName: "*.txt"
+          fileName: '*.txt'
