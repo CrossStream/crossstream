@@ -18,6 +18,7 @@ jobs:
         with:
           repository: crossstream/crossstream
           fileName: '*.txt'
+          latest: true
       - name: zw-downloader
         uses: robinraju/release-downloader@v1.12
         with:
