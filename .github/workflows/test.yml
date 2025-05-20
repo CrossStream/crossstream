@@ -28,7 +28,7 @@ jobs:
       #     latest: true
       - name: run
         id: run
-        run: exit 0
+        run: exit 42
         continue-on-error: true
       - name: Report
         uses: actions/github-script@v7
