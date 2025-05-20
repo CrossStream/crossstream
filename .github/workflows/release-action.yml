@@ -14,18 +14,18 @@ jobs:
         with:
           fetch-depth: 0
           repository: 'CrossStream/crossstream'
-      - id: tag
-        run: echo "tag=$(git describe --tags --always)" >> $GITHUB_OUTPUT
-      - id: contents
-        run: >
-           echo ${{ steps.log.outputs.tag }}
-           > ${{ github.event.repository.name }}.txt
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          # note you'll typically need to create a personal access token
-          # with permissions to create releases in the other repo
-          token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
-          files: "*.txt"
+      # - id: tag
+      #   run: echo "tag=$(git describe --tags --always)" >> $GITHUB_OUTPUT
+      # - id: contents
+      #   run: >
+      #      echo ${{ steps.log.outputs.tag }}
+      #      > ${{ github.event.repository.name }}.txt
+      # - name: Release
+      #   uses: softprops/action-gh-release@v2
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   with:
+      #     # note you'll typically need to create a personal access token
+      #     # with permissions to create releases in the other repo
+      #     token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
+      #     files: "*.txt"
 

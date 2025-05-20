@@ -1,7 +1,9 @@
 # YAML -*- mode: yaml; tab-width: 2; indent-tabs-mode: nil; coding: utf-8 -*-
 ---
-
 name: test
+
+# yamllint disable-line rule:line-length
+run-name: "test: ${{ github.event.workflow_run.head_branch }}#${{ github.event.workflow_run.head_commit.id }}"
 
 on:  # yamllint disable-line rule:truthy
   workflow_run:
@@ -13,16 +15,40 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: release-downloader
-        uses: robinraju/release-downloader@v1.12
+      - uses: actions/checkout@v4
         with:
-          repository: crossstream/crossstream
-          fileName: '*.txt'
-          latest: true
-      - name: zw-downloader
-        uses: robinraju/release-downloader@v1.12
+          fetch-depth: 0
+          repository: 'CrossStream/crossstream'
+          ref: ${{ github.event.workflow_run.head_commit.id }}
+
+      # - name: release-downloader
+      #   uses: robinraju/release-downloader@v1.12
+      #   with:
+      #     repository: crossstream/crossstream
+      #     fileName: '*.txt'
+      #     latest: true
+      # - name: zw-downloader
+      #   uses: robinraju/release-downloader@v1.12
+      #   with:
+      #     repository: 'Z-Wave-Alliance/z-wave-stack-binaries'
+      #     fileName: 'z-wave-stack-binaries-*-Linux.tar.gz'
+      #     token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
+      #     latest: true
+      - name: run
+        id: run
+        run: ./run.sh
+        continue-on-error: true
+      - name: Report
+        uses: actions/github-script@v7
+        if: always()
+        env:
+          status: ${{ steps.run.outcome }}
         with:
-          repository: 'Z-Wave-Alliance/z-wave-stack-binaries'
-          fileName: 'z-wave-stack-binaries-*-Linux.tar.gz'
-          token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
-          latest: true
+          script: |
+            await github.rest.repos.createCommitStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: context.sha,
+            state: process.env.status
+            });
+            process.exit( process.env.status == 'success' ? 0 : 1 );
