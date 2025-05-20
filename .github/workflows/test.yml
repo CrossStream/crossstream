@@ -42,4 +42,5 @@ jobs:
             repo: context.repo.repo,
             sha: context.sha,
             state: process.env.status
-            })
+            });
+            process.exit( process.env.status == 'success' );
