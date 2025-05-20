@@ -1,3 +1,3 @@
 #!/bin/sh -x
 
-exit 42
+exit 43
