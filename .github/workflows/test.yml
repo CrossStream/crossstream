@@ -43,12 +43,13 @@ jobs:
         if: always()
         env:
           status: ${{ steps.run.outcome }}
+          sha: ${{ github.event.workflow_run.head_commit.id }}
         with:
           script: |
             await github.rest.repos.createCommitStatus({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            sha: ${{ github.event.workflow_run.head_commit.id }}
+            sha: process.env.sha
             state: process.env.status
             });
             process.exit( process.env.status == 'success' ? 0 : 1 );
