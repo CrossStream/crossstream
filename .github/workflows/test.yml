@@ -10,9 +10,6 @@ on:  # yamllint disable-line rule:truthy
     workflows: ["release-action"]
     types:
       - completed
-    permissions:
-      contents: read
-      statuses: write
       
 jobs:
   on-success:
