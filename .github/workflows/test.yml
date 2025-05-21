@@ -10,6 +10,8 @@ on:  # yamllint disable-line rule:truthy
     workflows: ["release-action"]
     types:
       - completed
+    permissions:
+      contents: write      
 jobs:
   on-success:
     runs-on: ubuntu-latest
