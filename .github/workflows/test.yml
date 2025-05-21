@@ -11,6 +11,7 @@ on:  # yamllint disable-line rule:truthy
     types:
       - completed
     permissions: write-all
+    status: write
       
 jobs:
   on-success:
