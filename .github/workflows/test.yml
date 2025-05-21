@@ -12,6 +12,8 @@ on:  # yamllint disable-line rule:truthy
       - completed
     permissions: write-all
     status: write
+#   contents:
+# https://github.com/orgs/community/discussions/58868
       
 jobs:
   on-success:
@@ -48,7 +50,6 @@ jobs:
           status: ${{ steps.run.outcome }}
           sha: ${{ github.event.workflow_run.head_commit.id }}
         with:
-          github-token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
           script: |
             await github.rest.repos.createCommitStatus({
             owner: context.repo.owner,
