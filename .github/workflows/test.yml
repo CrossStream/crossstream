@@ -50,6 +50,7 @@ jobs:
           status: ${{ steps.run.outcome }}
           sha: ${{ github.event.workflow_run.head_commit.id }}
         with:
+          github-token: ${{ secrets.GH_CROSSSTREAM_ACCESS_TOKEN }}
           script: |
             await github.rest.repos.createCommitStatus({
             owner: context.repo.owner,
