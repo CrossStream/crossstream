@@ -33,7 +33,10 @@ jobs:
         run: |
           find ${{ runner.temp }}/
           find ${{ steps.image.outputs.download_path }}
-          file -E /tmp/action_image_artifact_${{ github.event.repository.name }}_latest/${{ github.event.repository.name }}_latest
+          file -E  ${{ env.file }} | grep -E ': POSIX tar archive'
+          tar tvf ${{ env.file }}
+        env:
+          file: /tmp/action_image_artifact_${{ github.event.repository.name }}_latest/${{ github.event.repository.name }}_latest
         
       
       - uses: actions/checkout@v4
