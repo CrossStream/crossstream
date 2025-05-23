@@ -28,7 +28,12 @@ jobs:
           workflow: "build"
           token: ${{ secrets.GH_SL_ACCESS_TOKEN }}
           workflow_run_id: ${{ github.event.workflow_run.id }}
-          path: ${{ runner.temp }}/artifacts/
+
+      - name: Check
+        run: |
+          find ${{ runner.temp }}/
+          find {{ steps.image.output.download_path }}
+        
       
       - uses: actions/checkout@v4
         with:
