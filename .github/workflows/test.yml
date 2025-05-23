@@ -11,10 +11,9 @@ on:  # yamllint disable-line rule:truthy
     types:
       - completed
     permissions:
+      contents: read      
       statuses: write
-#   contents:
 # https://github.com/orgs/community/discussions/58868
-      
 jobs:
   on-success:
     runs-on: ubuntu-latest
@@ -59,3 +58,4 @@ jobs:
             state: process.env.status
             });
             process.exit(process.env.status == 'success' ? 0 : 1);
+ 
