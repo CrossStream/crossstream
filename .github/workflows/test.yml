@@ -33,6 +33,7 @@ jobs:
         run: |
           find ${{ runner.temp }}/
           find ${{ steps.image.outputs.download_path }}
+          file -E /tmp/action_image_artifact_${{ github.event.repository.name }}latest/${{ github.event.repository.name }}_latest
         
       
       - uses: actions/checkout@v4
