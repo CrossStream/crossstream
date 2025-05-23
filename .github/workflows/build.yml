@@ -29,7 +29,7 @@ jobs:
       #     token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
       #     files: "*.txt"
       - name: build
-        run: docker build --tag "${{ github.event.repository.name }}:latest"
+        run: docker build --tag "${{ github.event.repository.name }}:latest" .
       - name: Upload container image
         # yamllint disable-line rule:line-length
         uses: ishworkh/container-image-artifact-upload@5d71a2417f0576fa11fe770fb04ece58c4587714  # v2.0.0
