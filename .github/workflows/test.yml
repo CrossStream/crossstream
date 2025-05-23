@@ -7,7 +7,7 @@ run-name: "test: ${{ github.event.workflow_run.head_branch }}#${{ github.event.w
 
 on:  # yamllint disable-line rule:truthy
   workflow_run:
-    workflows: ["release-action"]
+    workflows: ["build"]
     types:
       - completed
     permissions:
@@ -19,6 +19,16 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Download image
+        id: image
+        # yamllint disable-line rule:line-length
+        uses: ishworkh/container-image-artifact-download@ccb3671db007622e886a2d7037eb62b119d5ffaf  # v2.0.0
+        with:
+          image: "${{ github.event.repository.name }}:latest"
+          workflow: "build"
+          token: ${{ secrets.GH_SL_ACCESS_TOKEN }}
+          workflow_run_id: ${{ github.event.workflow_run.id }}
+      
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -42,6 +52,7 @@ jobs:
         id: run
         run: ./run.sh
         continue-on-error: true
+        
       - name: Report
         uses: actions/github-script@v7
         if: always()
