@@ -38,6 +38,7 @@ jobs:
           file -E  ${{ env.file }} | grep -E ': POSIX tar archive'
           tar -xOf ${{ env.file }} manifest.json | jq
           echo "TODO: https://docs.docker.com/engine/security/trust/"
+          rm -rfv "${{ env.file }}"
         env:
           file: /tmp/action_image_artifact_${{ github.event.repository.name }}_latest/${{ github.event.repository.name }}_latest
 
