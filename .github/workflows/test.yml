@@ -22,7 +22,7 @@ jobs:
       - name: Download image
         id: image
         # yamllint disable-line rule:line-length
-        uses: ishworkh/container-image-artifact-download@ccb3671db007622e886a2d7037eb62b119d5ffaf  # v2.0.0
+        uses: rzr/container-image-artifact-download@main  # v2.0.0
         with:
           image: "${{ github.event.repository.name }}:latest"
           workflow: "build"
