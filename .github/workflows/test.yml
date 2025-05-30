@@ -33,7 +33,7 @@ jobs:
       - name: Check downloaded artifact
         run: |
           echo "TODO: https://github.com/ishworkh/container-image-artifact-download/issues/7#issuecomment-2904751460"
-#         find ${{ runner.temp }}/
+          echo find ${{ runner.temp }}/
           find ${{ steps.image.outputs.download_path }}
           echo "TODO: Compare if matching the build artifacts"
           sha256sum  ${{ env.file }}
