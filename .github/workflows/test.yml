@@ -42,7 +42,7 @@ jobs:
           echo "TODO: https://docs.docker.com/engine/security/trust/"
           rm -rfv "${{ env.file }}"
         env:
-          file: {{ steps.image.outputs.download_path }}
+          file: ${{ steps.image.outputs.download_path }}
 
 
       - uses: actions/checkout@v4
