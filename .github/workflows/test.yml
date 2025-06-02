@@ -28,7 +28,7 @@ jobs:
           workflow: "build"
           token: ${{ secrets.GH_SL_ACCESS_TOKEN }}
           workflow_run_id: ${{ github.event.workflow_run.id }}
-          # directory: ${{ runner.temp }}
+          download_tmp_directory: ${{ runner.temp }}
             
       - name: Check downloaded artifact
         run: |
