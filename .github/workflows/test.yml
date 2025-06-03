@@ -58,10 +58,18 @@ jobs:
       #     token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
       #     latest: true
 
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: 0
+      #     ref: ${{ github.event.workflow_run.head_commit.id }}
+
+       - name: Download artifacts
+        # yamllint disable-line rule:line-length
+        uses: actions/upload-artifact@main
         with:
-          fetch-depth: 0
-          ref: ${{ github.event.workflow_run.head_commit.id }}
+          # yamllint disable-line
+          name: ${{ github.event.repository.name }}-run
+          token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
 
       - name: run
         id: run
