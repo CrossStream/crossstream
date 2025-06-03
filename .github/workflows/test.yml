@@ -26,7 +26,7 @@ jobs:
         with:
           image: "${{ github.event.repository.name }}:latest"
           workflow: "build"
-          token: ${{ secrets.GH_SL_ACCESS_TOKEN }}
+          token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
           workflow_run_id: ${{ github.event.workflow_run.id }}
 #         download_tmp_dir: ${{ runner.temp }}
             
