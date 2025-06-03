@@ -68,12 +68,12 @@ jobs:
         uses: actions/download-artifact@main
         with:
           # yamllint disable-line
-          name: ${{ github.event.repository.name }}-run
+          name: ${{ github.event.repository.name }}-bin
           token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
 
       - name: run
         id: run
-        run: ./run.sh
+        run: find . && ./bin/run.sh
         continue-on-error: true
 
       - name: Report
