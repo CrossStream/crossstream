@@ -74,7 +74,7 @@ jobs:
           
       - name: run
         id: run
-        run: find . && ./bin/run.sh
+        run: ./bin/run.sh
         continue-on-error: true
 
       - name: Report
