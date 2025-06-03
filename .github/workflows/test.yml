@@ -44,13 +44,6 @@ jobs:
         env:
           file: ${{ steps.image.outputs.download_path }}
 
-
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          repository: 'CrossStream/crossstream'
-          ref: ${{ github.event.workflow_run.head_commit.id }}
-
       # - name: release-downloader
       #   uses: robinraju/release-downloader@v1.12
       #   with:
@@ -64,6 +57,13 @@ jobs:
       #     fileName: 'z-wave-stack-binaries-*-Linux.tar.gz'
       #     token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
       #     latest: true
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          repository: 'CrossStream/crossstream'
+          ref: ${{ github.event.workflow_run.head_commit.id }}
+
       - name: run
         id: run
         run: ./run.sh
