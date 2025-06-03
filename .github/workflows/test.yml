@@ -29,7 +29,7 @@ jobs:
           token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
           workflow_run_id: ${{ github.event.workflow_run.id }}
           download_tmp_dir: ${{ runner.temp }}
-            
+
       - name: Check downloaded artifact
         run: |
           echo "TODO: https://github.com/ishworkh/container-image-artifact-download/issues/7#issuecomment-2904751460"
@@ -63,7 +63,7 @@ jobs:
       #     fetch-depth: 0
       #     ref: ${{ github.event.workflow_run.head_commit.id }}
 
-       - name: Download artifacts
+      - name: Download artifacts
         # yamllint disable-line rule:line-length
         uses: actions/download-artifact@main
         with:
@@ -92,4 +92,3 @@ jobs:
             state: process.env.status
             });
             process.exit(process.env.status == 'success' ? 0 : 1);
-
