@@ -5,10 +5,11 @@ name: build
 
 on:  # yamllint disable-line rule:truthy
   push:
-
+    types: [labeled]
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'safe to build and test')
     steps:
       - uses: actions/checkout@v4
         with:
