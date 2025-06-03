@@ -65,7 +65,7 @@ jobs:
 
        - name: Download artifacts
         # yamllint disable-line rule:line-length
-        uses: actions/upload-artifact@main
+        uses: actions/download-artifact@main
         with:
           # yamllint disable-line
           name: ${{ github.event.repository.name }}-run
