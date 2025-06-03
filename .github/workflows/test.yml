@@ -70,7 +70,8 @@ jobs:
           # yamllint disable-line
           name: ${{ github.event.repository.name }}-bin
           github-token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
-
+          run-id: ${{ github.event.workflow_run.id }}
+          
       - name: run
         id: run
         run: find . && ./bin/run.sh
