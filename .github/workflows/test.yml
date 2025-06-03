@@ -10,12 +10,12 @@ on:  # yamllint disable-line rule:truthy
     workflows: ["build"]
     types:
       - completed
+# https://github.com/orgs/community/discussions/58868
+jobs:
+  test:
     permissions:
       contents: read
       statuses: write
-# https://github.com/orgs/community/discussions/58868
-jobs:
-  on-success:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
