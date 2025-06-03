@@ -58,19 +58,11 @@ jobs:
       #     token: ${{ secrets.GH_ZWAVE_ACCESS_TOKEN }}
       #     latest: true
 
-      # - uses: actions/checkout@v4
-      #   with:
-      #     fetch-depth: 0
-      #     ref: ${{ github.event.workflow_run.head_commit.id }}
-
-      - name: Download artifacts
-        # yamllint disable-line rule:line-length
-        uses: actions/download-artifact@main
+      - uses: actions/checkout@v4
         with:
-          # yamllint disable-line
-          name: ${{ github.event.repository.name }}-bin
-          github-token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
+          fetch-depth: 0
+          repository: 'CrossStream/crossstream'
+          ref: ${{ github.event.workflow_run.head_commit.id }}
           path: ${{ runner.temp }}
                     
       - name: run
