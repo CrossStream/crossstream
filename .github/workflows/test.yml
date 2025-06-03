@@ -71,10 +71,11 @@ jobs:
           name: ${{ github.event.repository.name }}-bin
           github-token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
-          
+          path: ${{ runner.temp }}/artifacts
+                    
       - name: run
         id: run
-        run: ./bin/run.sh
+        run: ${{ runner.temp }}/artifact/bin/run.sh
         continue-on-error: true
 
       - name: Report
