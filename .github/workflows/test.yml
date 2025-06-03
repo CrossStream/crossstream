@@ -75,7 +75,7 @@ jobs:
                     
       - name: run
         id: run
-        run: find && ${{ runner.temp }}/run.sh
+        run: find ${{ runner.temp }} && ${{ runner.temp }}/run.sh
         continue-on-error: true
 
       - name: Report
