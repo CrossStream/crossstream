@@ -75,10 +75,10 @@ jobs:
 
       - name: run
         id: run
-          env:
-            working-directory: ${{ runner.temp }}
-          file: ${{ runner.temp }}/tests/z-wave-stack-binaries-test.sh
-        run: find . && bash ${{ runner.temp }}/run.sh
+        env:
+          working-directory: ${{ runner.temp }}
+          file: bin/run.sh
+        run: find . && bash ${{ env.file }}
       #   continue-on-error: true
 
       # - name: Report
