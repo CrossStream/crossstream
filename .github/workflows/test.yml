@@ -85,8 +85,8 @@ jobs:
           find ./
           echo "runner"
           # find /home/runner/work/_temp
-          # fubd /home/runner/work
-          find /home/runner/
+          find /home/runner/work
+          # find /home/runner/ # lot of stuff
           # pwd && find '$PWD' && bash ${{ env.file }}
       #   continue-on-error: true
 
