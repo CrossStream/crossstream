@@ -69,7 +69,7 @@ jobs:
         with:
           # yamllint disable-line
           name: ${{ github.event.repository.name }}-bin
-          github-token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GH_CROSSSTREAM_ACCESS_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
           path: ${{ runner.temp }}
 
