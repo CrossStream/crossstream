@@ -77,11 +77,11 @@ jobs:
         id: run
         env:
 #         working-directory: ${{ runner.temp }}
+#           echo ${{ GITHUB_WORKSPACE }}
           file: bin/run.sh
         run: |
           pwd
           find
-          echo ${{ GITHUB_WORKSPACE }}
           pwd && find '$PWD' && bash ${{ env.file }}
       #   continue-on-error: true
 
