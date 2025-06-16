@@ -19,30 +19,30 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Download image
-        id: image
-        # yamllint disable-line rule:line-length
-        uses: rzr/container-image-artifact-download@main  # v2.0.0
-        with:
-          image: "${{ github.event.repository.name }}:latest"
-          workflow: "build"
-          token: ${{ secrets.GH_ALL_PERSONAL_ACCESS_TOKEN }}
-          workflow_run_id: ${{ github.event.workflow_run.id }}
-          download_tmp_dir: ${{ runner.temp }}
+      # - name: Download image
+      #   id: image
+      #   # yamllint disable-line rule:line-length
+      #   uses: rzr/container-image-artifact-download@main  # v2.0.0
+      #   with:
+      #     image: "${{ github.event.repository.name }}:latest"
+      #     workflow: "build"
+      #     token: ${{ secrets.GH_CROSSSTREAM_ACCESS_TOKEN }}
+      #     workflow_run_id: ${{ github.event.workflow_run.id }}
+      #     download_tmp_dir: ${{ runner.temp }}
 
-      - name: Check downloaded artifact
-        run: |
-          echo "TODO: https://github.com/ishworkh/container-image-artifact-download/issues/7#issuecomment-2904751460"
-          echo find ${{ runner.temp }}/
-          find ${{ steps.image.outputs.download_path }}
-          echo "TODO: Compare if matching the build artifacts"
-          sha256sum  ${{ env.file }}
-          file -E  ${{ env.file }} | grep -E ': POSIX tar archive'
-          tar -xOf ${{ env.file }} manifest.json | jq
-          echo "TODO: https://docs.docker.com/engine/security/trust/"
-          rm -rfv "${{ env.file }}"
-        env:
-          file: ${{ steps.image.outputs.download_path }}
+      # - name: Check downloaded artifact
+      #   run: |
+      #     echo "TODO: https://github.com/ishworkh/container-image-artifact-download/issues/7#issuecomment-2904751460"
+      #     echo find ${{ runner.temp }}/
+      #     find ${{ steps.image.outputs.download_path }}
+      #     echo "TODO: Compare if matching the build artifacts"
+      #     sha256sum  ${{ env.file }}
+      #     file -E  ${{ env.file }} | grep -E ': POSIX tar archive'
+      #     tar -xOf ${{ env.file }} manifest.json | jq
+      #     echo "TODO: https://docs.docker.com/engine/security/trust/"
+      #     rm -rfv "${{ env.file }}"
+      #   env:
+      #     file: ${{ steps.image.outputs.download_path }}
 
       # - name: release-downloader
       #   uses: robinraju/release-downloader@v1.12
