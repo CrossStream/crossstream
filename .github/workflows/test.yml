@@ -75,22 +75,25 @@ jobs:
 
       - name: run
         id: run
-        run: find ${{ runner.temp }} && bash ${{ runner.temp }}/run.sh
-        continue-on-error: true
+          env:
+            working-directory: ${{ runner.temp }}
+          file: ${{ runner.temp }}/tests/z-wave-stack-binaries-test.sh
+        run: find . && bash ${{ runner.temp }}/run.sh
+      #   continue-on-error: true
 
-      - name: Report
-        uses: actions/github-script@v7
-        if: always()
-        env:
-          status: ${{ steps.run.outcome }}
-          sha: ${{ github.event.workflow_run.head_commit.id }}
-        with:
-          github-token: ${{ secrets.GH_CROSSSTREAM_ACCESS_TOKEN }}
-          script: |
-            await github.rest.repos.createCommitStatus({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            sha: process.env.sha,
-            state: process.env.status
-            });
-            process.exit(process.env.status == 'success' ? 0 : 1);
+      # - name: Report
+      #   uses: actions/github-script@v7
+      #   if: always()
+      #   env:
+      #     status: ${{ steps.run.outcome }}
+      #     sha: ${{ github.event.workflow_run.head_commit.id }}
+      #   with:
+      #     github-token: ${{ secrets.GH_CROSSSTREAM_ACCESS_TOKEN }}
+      #     script: |
+      #       await github.rest.repos.createCommitStatus({
+      #       owner: context.repo.owner,
+      #       repo: context.repo.repo,
+      #       sha: process.env.sha,
+      #       state: process.env.status
+      #       });
+      #       process.exit(process.env.status == 'success' ? 0 : 1);
