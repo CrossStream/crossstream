@@ -76,12 +76,17 @@ jobs:
       - name: run
         id: run
         env:
-#         working-directory: ${{ runner.temp }}
-#           echo ${{ GITHUB_WORKSPACE }}
+#         working-directory: # /home/runner/work/crossstream/crossstream
+          working-directory: ${{ runner.temp }} 
+#           echo ${{ GITHUB_WORKSPACE }} 
           file: bin/run.sh
         run: |
-          pwd
+          set +x
+          pwd # /home/runner/work/crossstream/crossstream
           find
+          find /home/runner/work/_temp
+          fubd /home/runner/work
+          fubd /home/runner/
           pwd && find '$PWD' && bash ${{ env.file }}
       #   continue-on-error: true
 
