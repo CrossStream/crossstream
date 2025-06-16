@@ -77,8 +77,7 @@ jobs:
         id: run
         env:
 #         working-directory: # /home/runner/work/crossstream/crossstream
-#         working-directory: ${{ runner.temp }} 
-#           echo ${{ GITHUB_WORKSPACE }} 
+#         working-directory: ${{ runner.temp }}  ##           echo ${{ GITHUB_WORKSPACE }} 
           file: bin/run.sh
         run: |
           set +x
