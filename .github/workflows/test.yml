@@ -71,13 +71,13 @@ jobs:
           name: ${{ github.event.repository.name }}-bin
           github-token: ${{ secrets.GH_CROSSSTREAM_ACCESS_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
-#         path: ${{ runner.temp }} # Default is $GITHUB_WORKSPACE
+          path: ${{ runner.temp }} # Default is $GITHUB_WORKSPACE
 
       - name: run
         id: run
         env:
 #         working-directory: # /home/runner/work/crossstream/crossstream
-#         working-directory: ${{ runner.temp }}  ##           echo ${{ GITHUB_WORKSPACE }} 
+          working-directory: ${{ runner.temp }}  ##           echo ${{ GITHUB_WORKSPACE }} 
           file: bin/run.sh
         run: |
           set +x
