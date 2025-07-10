@@ -111,7 +111,25 @@ jobs:
         run:
           exit 1
 
-      - name: check
+      - name: Propagate status on fail
+        # yamllint disable-line rule:line-length
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
         if: failure()
-        run:
-          echo ${{ steps.test.outcome }}
+        env:
+          status: ${{ steps.run.outcome }}
+          ref: ${{ github.event.workflow_run.head_commit.id }}
+        with:
+          script: |
+            const status = await github.rest.repos.getCombinedStatusForRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: process.env.ref,
+            });
+            core.info(`Combined status: ${status.data.state}`);
+            await github.rest.repos.createCommitStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: process.env.ref,
+            state: 'failure'
+            })
+            core.setFailed(`Status: ${process.env.status}`);
