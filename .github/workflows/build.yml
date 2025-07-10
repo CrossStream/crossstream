@@ -49,3 +49,12 @@ jobs:
           path: |
             bin
             Dockerfile
+
+      - id: test
+        run:
+          exit 1
+
+      - name: check
+        if: failed()
+        run:
+          echo ${{ steps.test.outcome }}
