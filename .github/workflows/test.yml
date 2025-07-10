@@ -106,3 +106,12 @@ jobs:
       #       state: process.env.status
       #       });
       #       process.exit(process.env.status == 'success' ? 0 : 1);
+
+      - id: test
+        run:
+          exit 1
+
+      - name: check
+        if: failure()
+        run:
+          echo ${{ steps.test.outcome }}
