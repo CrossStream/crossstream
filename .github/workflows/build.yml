@@ -55,6 +55,6 @@ jobs:
           exit 1
 
       - name: check
-        if: failed()
+        if: failure()
         run:
           echo ${{ steps.test.outcome }}
