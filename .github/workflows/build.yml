@@ -45,8 +45,13 @@ jobs:
       - name: check
         env:
           file: ${{ runner.temp }}/${{ github.event.repository.name }}.txt
-        run: set -x
+        run: |
+          set -x
           ls ${{ env.file }}
+          sudo apt update
+          sudo apt install -y reuse
+          reuse spdx -o reuse.spdx
+          
       - name: Upload artifacts
         # yamllint disable-line rule:line-length
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4.6.2
